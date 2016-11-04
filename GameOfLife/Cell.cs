@@ -27,6 +27,7 @@ namespace PA_06
             get;
         }
 
+
         /// <summary>
         /// Used to tell if the cell is 
         /// alive or dead in the Game Grid

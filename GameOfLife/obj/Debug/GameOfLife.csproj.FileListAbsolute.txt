@@ -12,3 +12,6 @@ C:\Users\Manny\Documents\GitHub\GameOfLife\GameOfLife\obj\Debug\GameOfLife.Prope
 C:\Users\Manny\Documents\GitHub\GameOfLife\GameOfLife\obj\Debug\GameOfLife.csproj.GenerateResource.Cache
 C:\Users\Manny\Documents\GitHub\GameOfLife\GameOfLife\obj\Debug\GameOfLife.exe
 C:\Users\Manny\Documents\GitHub\GameOfLife\GameOfLife\obj\Debug\GameOfLife.pdb
+C:\Users\Manny\Documents\GitHub\GameOfLife\GameOfLife\bin\Debug\GameOfLife.exe.config
+C:\Users\Manny\Documents\GitHub\GameOfLife\GameOfLife\bin\Debug\GameOfLife.exe
+C:\Users\Manny\Documents\GitHub\GameOfLife\GameOfLife\bin\Debug\GameOfLife.pdb

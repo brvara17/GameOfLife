@@ -12,21 +12,22 @@ namespace PA_06
 {
     public partial class Form1 : Form
     {
-
         Cell [,] currGameField, nextGameField;
-
         int rows = 50;
         int cols = 50;
 
-        float cellHeight;
-        float cellWidth;
+        public float cellHeight;
+        public float cellWidth;
 
         float real_Height;
 
         string generationUpdate;
 
         Pen pen = new Pen(Color.Black, 1);
+        Pen gridTogglePen = new Pen(Color.LightGray, 1);
         Pen penMouseDown = new Pen(Color.Blue, 1);
+
+        bool gridToggleOnOff = true;
 
         private void SetCell()
         {
@@ -46,7 +47,18 @@ namespace PA_06
         {
             Console.WriteLine("Paint Called");
             Graphics g = e.Graphics;
-            
+
+            //Toggles the grid On/Off
+            if (!gridToggleOnOff)
+            {
+                pen = new Pen(Color.WhiteSmoke, 1);
+            }
+            else
+            {
+                pen = new Pen(Color.Black, 1);
+            }
+        
+                        
 
             //Draws Rows on Grid
             for (int i = 0; i < rows; i++)
@@ -74,12 +86,13 @@ namespace PA_06
 
             currGameField = new Cell[rows, cols];
 
-            //Populate grid with each cell and set point
+            //Populate grid with each cell attributes
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)
                 {
                     currGameField[i, j] = new Cell(new Point(i, j));
+                    nextGameField[i, j] = currGameField[i, j];
                 }
             }
 
@@ -164,14 +177,34 @@ namespace PA_06
 
         private void clearGridToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //Sets all cells to false, then we gotta add code to e
+
             Console.WriteLine("Clear Grid");
-            SetCell();
+            // SetCell();
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    currGameField[i, j].cellState = false;
+                }
+            }
+            Invalidate();
+
         }
 
         private void gridOToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        {           
             Console.WriteLine("Grid On");
-            SetCell();
+            if (gridOToolStripMenuItem.Checked)
+                gridToggleOnOff = true;
+            else
+                gridToggleOnOff = false;
+            Invalidate();
+        }
+
+        public void ClearGrid()
+        {
+
         }
     }
 }
