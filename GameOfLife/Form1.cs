@@ -13,7 +13,7 @@ namespace PA_06
     public partial class Form1 : Form
     {
 
-        Cell [][] gameField;
+        Cell [,] currGameField, nextGameField;
 
         int rows = 50;
         int cols = 50;
@@ -46,6 +46,7 @@ namespace PA_06
         {
             Console.WriteLine("Paint Called");
             Graphics g = e.Graphics;
+            
 
             //Draws Rows on Grid
             for (int i = 0; i < rows; i++)
@@ -55,12 +56,34 @@ namespace PA_06
             for (int i = 1; i < cols; i++)
                 g.DrawLine(pen, cellWidth * i, menuStrip_Heading.Height, cellWidth * i, ClientSize.Height);
 
+
+                      
         }
 
         private void Form1_Resize(object sender, EventArgs e)
         {
             SetCell();
             Invalidate();
+            
+            
+            
+        }
+
+        public void cellGrid()
+        {
+
+            currGameField = new Cell[rows, cols];
+
+            //Populate grid with each cell and set point
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    currGameField[i, j] = new Cell(new Point(i, j));
+                }
+            }
+
+
         }
 
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
