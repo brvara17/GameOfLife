@@ -154,12 +154,14 @@
             this.setTooStriplGridColor.Name = "setTooStriplGridColor";
             this.setTooStriplGridColor.Size = new System.Drawing.Size(189, 22);
             this.setTooStriplGridColor.Text = "Set Grid Color";
+            this.setTooStriplGridColor.Click += new System.EventHandler(this.setTooStriplGridColor_Click);
             // 
             // setCreatureColorToolStripMenuItem
             // 
             this.setCreatureColorToolStripMenuItem.Name = "setCreatureColorToolStripMenuItem";
             this.setCreatureColorToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.setCreatureColorToolStripMenuItem.Text = "Set Creature Color";
+            this.setCreatureColorToolStripMenuItem.Click += new System.EventHandler(this.setCreatureColorToolStripMenuItem_Click);
             // 
             // toolStripEvolSetting
             // 

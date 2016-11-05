@@ -23,7 +23,12 @@ namespace PA_06
 
         string generationUpdate;
 
-        ColorDialog backgroundColor = new ColorDialog();
+        ColorDialog backgroundColorBox = new ColorDialog();
+        ColorDialog gridColorBox = new ColorDialog();
+        ColorDialog creatureColorBox = new ColorDialog();
+
+        Color gridLineColor = Color.Black;
+        Color creatureColor = Color.Blue;
 
         Pen pen = new Pen(Color.Black, 1);
         Pen gridTogglePen = new Pen(Color.LightGray, 1);
@@ -49,7 +54,9 @@ namespace PA_06
         public Form1()
         {
             InitializeComponent();
-            SetCell();       
+            SetCell();
+            backgroundColorBox.Color = Color.WhiteSmoke;
+            gridColorBox.Color = Color.Black;
 
         }
 
@@ -80,12 +87,12 @@ namespace PA_06
             }
 
             //Just for visual confirmation that the function is working correctly
-            foreach (Cell field in currGameField)
-            {
-                Console.WriteLine(field.x1 + " " + field.y1);
-            }
+            //foreach (Cell field in currGameField)
+            //{
+            //    Console.WriteLine(field.x1 + " " + field.y1);
+            //}
 
-            Console.WriteLine(currGameField.Length);
+            //Console.WriteLine(currGameField.Length);
 
         }
 
@@ -97,11 +104,11 @@ namespace PA_06
             //Toggles the grid On/Off
             if (!gridToggleOnOff)
             {
-                pen = new Pen(Color.WhiteSmoke, 1);
+                pen = new Pen(backgroundColorBox.Color, 1);
             }
             else
             {
-                pen = new Pen(Color.Black, 1);
+                pen = new Pen(gridLineColor, 1);
             }
         
                         
@@ -202,38 +209,30 @@ namespace PA_06
 
         private void clearGridToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Sets all cells to false, then we gotta add code to e
+            //Sets all cells to false and resets the color to background but should be changed
+            //to reset all colors in each cell since each cell will be colored not the background
             Console.WriteLine("Clear Grid");
             // SetCell();
-            Rectangle clearCell;
-            Graphics g = this.CreateGraphics();
-            int tempYValue;
-            int tempXValue;
+
+            BackColor = backgroundColorBox.Color;
+
             int r = 0;
             int c = 0;
             for (r = 0; r < rows; r++)
             {
-                tempYValue = (int)(menuStrip_Heading.Height + (cellHeight * r));
-
                 for (c = 0; c < cols; c++)
                 {
-                    
-                    tempXValue = (int)cellWidth * c;
-                    BackColor = backgroundColor.Color;
                     currGameField[r, c].cellState = false;
                 }
             }
-
-
-
-
+            
             Invalidate();
 
         }
 
         private void gridOToolStripMenuItem_Click(object sender, EventArgs e)
-        {           
-            Console.WriteLine("Grid On");
+        {
+            //Toggles the grid on or off
             if (gridOToolStripMenuItem.Checked)
                 gridToggleOnOff = true;
             else
@@ -244,14 +243,26 @@ namespace PA_06
         private void setBackgroundColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Stores color chosen by user
-           backgroundColor.ShowDialog();
-            BackColor = backgroundColor.Color;
+           backgroundColorBox.ShowDialog();
+            BackColor = backgroundColorBox.Color;
 
         }
 
-        public void ClearGrid()
+        private void setCreatureColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            creatureColorBox.ShowDialog();
+            creatureColor = creatureColorBox.Color;
+            
         }
+
+        private void setTooStriplGridColor_Click(object sender, EventArgs e)
+        {
+            //Display color box and user selects grid color
+            gridColorBox.ShowDialog();
+            gridLineColor = gridColorBox.Color;
+            Invalidate();
+        }
+
+       
     }
 }
