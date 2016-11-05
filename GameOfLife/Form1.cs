@@ -23,7 +23,7 @@ namespace PA_06
 
         string generationUpdate;
 
-        ColorDialog allColors = new ColorDialog();
+        ColorDialog backgroundColor = new ColorDialog();
 
         Pen pen = new Pen(Color.Black, 1);
         Pen gridTogglePen = new Pen(Color.LightGray, 1);
@@ -31,7 +31,7 @@ namespace PA_06
 
         Brush aliveBrush = new SolidBrush(Color.Blue);
         Brush deadBrush = new SolidBrush(Color.WhiteSmoke);
-        Brush[,] backGroundBrush;
+        
         
 
         bool gridToggleOnOff = true;
@@ -203,16 +203,30 @@ namespace PA_06
         private void clearGridToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Sets all cells to false, then we gotta add code to e
-
             Console.WriteLine("Clear Grid");
             // SetCell();
-            for (int i = 0; i < rows; i++)
+            Rectangle clearCell;
+            Graphics g = this.CreateGraphics();
+            int tempYValue;
+            int tempXValue;
+            int r = 0;
+            int c = 0;
+            for (r = 0; r < rows; r++)
             {
-                for (int j = 0; j < cols; j++)
+                tempYValue = (int)(menuStrip_Heading.Height + (cellHeight * r));
+
+                for (c = 0; c < cols; c++)
                 {
-                    currGameField[i, j].cellState = false;
+                    
+                    tempXValue = (int)cellWidth * c;
+                    BackColor = backgroundColor.Color;
+                    currGameField[r, c].cellState = false;
                 }
             }
+
+
+
+
             Invalidate();
 
         }
@@ -229,19 +243,9 @@ namespace PA_06
 
         private void setBackgroundColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Graphics backGrnd = this.CreateGraphics();
-            Rectangle backGroundRect;
-            allColors.ShowDialog();
-            backGroundBrush = new SolidBrush(allColors.Color);
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols; j++)
-                {
-                    backGroundRect = new Rectangle(currGameField[i, j].cellPosition.X, currGameField[i, j].cellPosition.Y, (int)cellWidth - 1, (int)cellHeight - 1);
-                    backGrnd.FillRectangle(backGroundBrush, backGroundRect);
-                }
-            }
-            Invalidate();
+            //Stores color chosen by user
+           backgroundColor.ShowDialog();
+            BackColor = backgroundColor.Color;
 
         }
 
