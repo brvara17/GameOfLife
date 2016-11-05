@@ -39,8 +39,6 @@
             this.clearGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.setBackgroundColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.backgroundColorWhite = new System.Windows.Forms.ToolStripMenuItem();
-            this.backgroundColorGray = new System.Windows.Forms.ToolStripMenuItem();
             this.setTooStriplGridColor = new System.Windows.Forms.ToolStripMenuItem();
             this.setCreatureColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripEvolSetting = new System.Windows.Forms.ToolStripMenuItem();
@@ -146,25 +144,10 @@
             // 
             // setBackgroundColorToolStripMenuItem
             // 
-            this.setBackgroundColorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.backgroundColorWhite,
-            this.backgroundColorGray});
             this.setBackgroundColorToolStripMenuItem.Name = "setBackgroundColorToolStripMenuItem";
             this.setBackgroundColorToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.setBackgroundColorToolStripMenuItem.Text = "Set Background Color";
-            // 
-            // backgroundColorWhite
-            // 
-            this.backgroundColorWhite.CheckOnClick = true;
-            this.backgroundColorWhite.Name = "backgroundColorWhite";
-            this.backgroundColorWhite.Size = new System.Drawing.Size(105, 22);
-            this.backgroundColorWhite.Text = "White";
-            // 
-            // backgroundColorGray
-            // 
-            this.backgroundColorGray.Name = "backgroundColorGray";
-            this.backgroundColorGray.Size = new System.Drawing.Size(105, 22);
-            this.backgroundColorGray.Text = "Gray";
+            this.setBackgroundColorToolStripMenuItem.Click += new System.EventHandler(this.setBackgroundColorToolStripMenuItem_Click);
             // 
             // setTooStriplGridColor
             // 
@@ -281,8 +264,6 @@
         private System.Windows.Forms.ToolStripMenuItem setBackgroundColorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setCreatureColorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setTooStriplGridColor;
-        private System.Windows.Forms.ToolStripMenuItem backgroundColorWhite;
-        private System.Windows.Forms.ToolStripMenuItem backgroundColorGray;
         private System.Windows.Forms.ToolStripMenuItem evolutionParametersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem simulationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem startEToolStripMenuItem;

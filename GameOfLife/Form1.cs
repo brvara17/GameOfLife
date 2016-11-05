@@ -23,9 +23,16 @@ namespace PA_06
 
         string generationUpdate;
 
+        ColorDialog allColors = new ColorDialog();
+
         Pen pen = new Pen(Color.Black, 1);
         Pen gridTogglePen = new Pen(Color.LightGray, 1);
         Pen penMouseDown = new Pen(Color.Blue, 1);
+
+        Brush aliveBrush = new SolidBrush(Color.Blue);
+        Brush deadBrush = new SolidBrush(Color.WhiteSmoke);
+        Brush[,] backGroundBrush;
+        
 
         bool gridToggleOnOff = true;
 
@@ -34,14 +41,53 @@ namespace PA_06
             real_Height = ClientSize.Height - menuStrip_Heading.Height;
             cellHeight = ClientSize.Height / (float)rows;
             cellWidth = ClientSize.Width / (float)cols;
+
+            currGameField = new Cell[rows, cols];
+            SetGameFieldArray();
         }
 
         public Form1()
         {
             InitializeComponent();
             SetCell();       
+
         }
-        
+
+        /// <summary>
+        /// Populates an Array with the grid properties.
+        /// Each cell in the game field will have the top left corner point coordinates
+        /// in its x1 and y1 variables. 
+        /// </summary>
+        private void SetGameFieldArray()
+        {
+
+            int tempYValue;
+            int tempXValue;
+            int r = 0;
+            int c = 0;
+            for (r = 0; r < rows; r++)
+            {
+                tempYValue = (int)(menuStrip_Heading.Height + (cellHeight * r));
+
+                for (c = 0; c < cols; c++)
+                {
+                    tempXValue = (int)cellWidth * c;
+                    Cell temp = new Cell();
+                    currGameField[r, c] = temp;
+                    currGameField[r, c].x1 = tempYValue;
+                    currGameField[r, c].y1 = tempXValue;
+                }
+            }
+
+            //Just for visual confirmation that the function is working correctly
+            foreach (Cell field in currGameField)
+            {
+                Console.WriteLine(field.x1 + " " + field.y1);
+            }
+
+            Console.WriteLine(currGameField.Length);
+
+        }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
@@ -75,28 +121,7 @@ namespace PA_06
         private void Form1_Resize(object sender, EventArgs e)
         {
             SetCell();
-            Invalidate();
-            
-            
-            
-        }
-
-        public void cellGrid()
-        {
-
-            currGameField = new Cell[rows, cols];
-
-            //Populate grid with each cell attributes
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols; j++)
-                {
-                    currGameField[i, j] = new Cell(new Point(i, j));
-                    nextGameField[i, j] = currGameField[i, j];
-                }
-            }
-
-
+            Invalidate();              
         }
 
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
@@ -200,6 +225,24 @@ namespace PA_06
             else
                 gridToggleOnOff = false;
             Invalidate();
+        }
+
+        private void setBackgroundColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Graphics backGrnd = this.CreateGraphics();
+            Rectangle backGroundRect;
+            allColors.ShowDialog();
+            backGroundBrush = new SolidBrush(allColors.Color);
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    backGroundRect = new Rectangle(currGameField[i, j].cellPosition.X, currGameField[i, j].cellPosition.Y, (int)cellWidth - 1, (int)cellHeight - 1);
+                    backGrnd.FillRectangle(backGroundBrush, backGroundRect);
+                }
+            }
+            Invalidate();
+
         }
 
         public void ClearGrid()
